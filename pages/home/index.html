@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="eng">
+<h1>My Todos</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bun Todos</title>
-</head>
+<script>
+    function toggleTodoInput(id, titleId, updateBtnId, editBtnId) {
+        const inputEl = document.getElementById(id);
+        const titleEl = document.getElementById(titleId);
+        const updateBtnEl = document.getElementById(updateBtnId);
+        const editBtnEl = document.getElementById(editBtnId);
 
-<body>
-    This is a new Bun project
-</body>
+        if (inputEl) {
+            console.log("Found element:", inputEl);
+            inputEl.style.display = inputEl.style.display === 'none' ? 'block' : 'none';
+            titleEl.style.display = titleEl.style.display === 'none' ? 'block' : 'none';
+            updateBtnEl.style.display = updateBtnEl.style.display === 'none' ? 'block' : 'none';
+
+            editBtnEl.innerText = editBtnEl.innerText == 'Edit' ? 'Cancel' : 'Edit';
+
+        } else {
+            console.error("Could not find element with ID:", id);
+        }
+    }
+</script>
+
+<form method="POST">
+    <input type="hidden" name="intent" value="add-todo" />
+    <input type="text" name="title" required placeholder="New Task...">
+    <button type="submit">Add</button>
+</form>
+
+<ul style="display:flex; flex-direction: column; gap: .5rem;">
+    {{LIST}}
+</ul>
