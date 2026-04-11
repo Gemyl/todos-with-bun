@@ -1,3 +1,4 @@
+import { checkSession } from "./lib/auth";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 

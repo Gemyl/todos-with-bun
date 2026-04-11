@@ -1,5 +1,7 @@
-import { createDirectus, rest } from "@directus/sdk";
+import { authentication, createDirectus, rest } from "@directus/sdk";
 
-const directus = createDirectus("http://app.summon.test").with(rest());
+const directus = createDirectus(process.env.DIRECTUS_URL as string)
+  .with(rest())
+  .with(authentication("json", { credentials: "include", autoRefresh: false }));
 
 export default directus;

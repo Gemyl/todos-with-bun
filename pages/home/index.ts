@@ -1,8 +1,22 @@
+import type { BunRequest } from "bun";
 import { addTodo, deleteTodo, getTodosList, updateTodo } from "./actions";
 import type { Todo } from "./model";
+import { checkSession } from "../../lib/auth";
 
-export default async function HomePage(req: Request, layout: string) {
+export default async function HomePage(req: BunRequest, layout: string) {
   const homePage = await Bun.file("./pages/home/index.html").text();
+  const isAuthenticated = await checkSession(req);
+
+  if (!isAuthenticated) {
+    console.log("Redirecting to login...");
+    return new Response(null, {
+      status: 303,
+      headers: {
+        Location: "/login",
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
   if (req.method === "POST") {
     const data = await req.formData();
