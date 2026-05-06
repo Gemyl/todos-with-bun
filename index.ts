@@ -2,7 +2,6 @@ import { checkSession } from "./lib/auth";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 
-// this is a commnet to test
 const PORT = 3000;
 const layoutFile = Bun.file("index.html");
 const layout = await layoutFile.text();
